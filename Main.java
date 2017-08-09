@@ -119,6 +119,7 @@ class Gui extends JFrame { //We must extend JFrame to be able to use Swing and c
         rightPanel.add(bEval);
         rightPanel.add(bDisplay);
         bottomPanel.add(txtFieldResults);
+        bottomPanel.add(scroll);
         bottomPanel.setBorder(BorderFactory.createLoweredSoftBevelBorder());
 
         master.add(leftPanel, BorderLayout.WEST);
@@ -158,10 +159,13 @@ class Gui extends JFrame { //We must extend JFrame to be able to use Swing and c
             }
         });
         bDisplay.addActionListener(new ActionListener() {
-//            fixme readd text area with rf
+
             @Override
             public void actionPerformed(ActionEvent e) {
                 ReadFile rf = new ReadFile("stars.txt");
+                txtFieldStars.setText("--- " + rf.returnInfo().size() + " All Star Reps! ---\n\n");
+                txtFieldStars.append(rf.returnInfo().toString().replace("[", "").replace("]", "").replace(",", ""));
+                txtFieldStars.setCaretPosition(0);
                 TableGui tgui = new TableGui(rf.returnInfo());
                 tgui.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                 tgui.setSize(770, 425); //setting window size
