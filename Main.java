@@ -146,9 +146,8 @@ class Gui extends JFrame { //We must extend JFrame to be able to use Swing and c
             public void actionPerformed(ActionEvent e) {
 
                 int yes = JOptionPane.showConfirmDialog(null, "Are you sure you wish to close the application?", "", JOptionPane.YES_NO_OPTION);
-                if(yes == JOptionPane.YES_OPTION){ //if user clicks yes, end program
-                    System.exit(0);
-                }
+                if(yes == JOptionPane.YES_OPTION) System.exit(0); //if user clicks yes, end program
+
             }
         });
         bEval.addActionListener(new ActionListener() {
@@ -166,12 +165,14 @@ class Gui extends JFrame { //We must extend JFrame to be able to use Swing and c
                 txtFieldStars.setText("--- " + rf.returnInfo().size() + " All Star Reps! ---\n\n");
                 txtFieldStars.append(rf.returnInfo().toString().replace("[", "").replace("]", "").replace(",", ""));
                 txtFieldStars.setCaretPosition(0);
-                TableGui tgui = new TableGui(rf.returnInfo());
-                tgui.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                tgui.setSize(770, 425); //setting window size
-                tgui.setLocation(GraphicsEnvironment.getLocalGraphicsEnvironment().getCenterPoint().x , GraphicsEnvironment.getLocalGraphicsEnvironment().getCenterPoint().y );
-                tgui.setResizable(false);
-                tgui.setVisible(true); //calling our JFrame Panel
+                if(rf.returnInfo().size() > 0) {
+                    TableGui tgui = new TableGui(rf.returnInfo());
+                    tgui.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                    tgui.setSize(770, 425); //setting window size
+                    tgui.setLocation(GraphicsEnvironment.getLocalGraphicsEnvironment().getCenterPoint().x, GraphicsEnvironment.getLocalGraphicsEnvironment().getCenterPoint().y);
+                    tgui.setResizable(false);
+                    tgui.setVisible(true); //calling our JFrame Panel
+                }
 
             }
         });

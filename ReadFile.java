@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -5,7 +6,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class ReadFile {
-    List<SalesRep> rep = new ArrayList<SalesRep>();
+    List<SalesRep> rep = new ArrayList<SalesRep>(); //list to hold all objects created.
     SalesRep oRep = new SalesRep();
 
     ReadFile(String filename){
@@ -46,7 +47,7 @@ public class ReadFile {
 
             reader.close();
         }catch(FileNotFoundException F){
-            F.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Please create files first utilzing the form.");
         }
     }
     public List<SalesRep> returnInfo(){
