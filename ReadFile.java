@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public class ReadFile {
     List<SalesRep> rep = new ArrayList<SalesRep>(); //list to hold all objects created.
-    SalesRep oRep = new SalesRep();
+    boolean created = false;
 
     ReadFile(String filename){
         rep.clear();
@@ -31,18 +31,14 @@ public class ReadFile {
                             rep.get(i).setSuppliesTotal(rep.get(i).getSuppliesTotal() + Double.parseDouble(repInfo[3])); //add supplies to previous total
                             rep.get(i).setBooksTotal(rep.get(i).getBooksTotal() + Double.parseDouble(repInfo[4])); //add books to previous total
                             rep.get(i).setPaperTotal(rep.get(i).getPaperTotal() + Double.parseDouble(repInfo[5])); //add paper to previous total
+                            created = true; //set value to true, so that another is not created
                             break; //break the loop since done
                         }
-                        else {
-                            rep.add(new SalesRep(repInfo)); //add new rep since no matches found
-                            break; //break the loop since done
-
-                        }
-                    }
+                    }if(created == false) rep.add(new SalesRep(repInfo)); //If For loop ends with no creation create a new sales rep.
                 }else{
                     rep.add(new SalesRep(repInfo)); //since List of salesreps is empty add new one
-
                 }
+                created = false; //reset created variable for next read.
             }
 
             reader.close();
